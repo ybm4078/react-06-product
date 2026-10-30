@@ -22,31 +22,30 @@ function ProductList() {
         return <div className={styles.loading}>데이터를 로드 중입니다...</div>;
     }
 
+    if (list.length === 0) {
+        return <div className={styles.loading}>상품을 찾을 수 없거나, 오류가 발생 되었습니다.</div>;
+    }
+
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>화장품 게시판</h1>
-            <table className={styles.boardTable}>
-                <thead>
-                    <tr>
-                        <th className={styles.idCell}>번호</th>
-                        <th>제목</th>
-                        <th>브랜드</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {list.map((item, index) => (
-                        <tr key={index} className={styles.tableRow}>
-                            <td className={styles.idCell}>{item.id}</td>
-                            <td className={styles.titleCell}>
-                                <Link to={`/product/${item.id}`} className={styles.link}>
-                                    {item.title}
-                                </Link>
-                            </td>
-                            <td className={styles.userIdCell}>{item.brand}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <h1 className={styles.title}>상품 목록</h1>
+            <div className={styles.listWrap}>
+                {list.map((item) => {
+                    return (
+                        <Link to={`/product/${item.id}`} key={item.id} className={styles.card}>
+                            <img
+                                src={item.thumbnail}
+                                alt={item.title}
+                                className={styles.thumbnail}
+                            />
+                            <div className={styles.info}>
+                                <h3 className={styles.name}>{item.title}</h3>
+                                <p className={styles.price}>${item.price}</p>
+                            </div>
+                        </Link>
+                    );
+                })}
+            </div>
         </div>
     );
 }
