@@ -11,12 +11,12 @@ function ProductList() {
             .then(res => res.json()) // string -> 객체/배열 상태로 가공
             .then(json => {
                 setList(json.products);
-                setLoading(false);
             })
             .catch(err => {
                 console.log(err);
-                setLoading(false);
-            });
+            })
+
+            .finally(() => setLoading(false));
     }, []);
     if (loading) {
         return <div className={styles.loading}>데이터를 로드 중입니다...</div>;

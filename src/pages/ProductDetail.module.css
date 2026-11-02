@@ -4,22 +4,31 @@
     font-size: 1.1rem;
     color: #999;
 }
+.background {
+    background-image: url("https://images.unsplash.com/photo-1759563871375-d5b140f6646e?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D");
+    height: 100dvh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.5s;
+}
 
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width:1200px;
     margin: 0 auto;
     padding: 60px 20px;
 }
 
 .backLink {
+    text-decoration: none;
     color: #666;
     font-size: 14px;
-    margin-bottom: 32px;
     padding: 8px 12px;
     border-radius: 6px;
     background-color: #f1f3f5;
-    border: 1px solid #666;
+    border: 1px solid #cbcbcb;
+    margin: 10px;
 }
 
 .backLink:hover {
@@ -27,28 +36,47 @@
     color: #0077ff;
 }
 
-.article {
-    padding-top: 40px;
-}
-
-.title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #111;
-    margin-bottom: 24px;
-}
-
-.meta {
-    color: #888;
-    margin-bottom: 40px;
-}
-
 .body {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    white-space: pre-wrap; /* '\n'이라고 하는 줄바꿈 기호를 줄바꿈 처리로 사용하겠다 */
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    border: 1px solid #cbcbcb;
+    border-radius: 10px;
+    margin: 20px 0;
+}
 
-    /*
-        사용자에게 textarea 태그를 통해 입력을 받으면 저렇게 줄바꿈 기호를 사용해서 저장하게됨
-     */
+.thumbnail {
+    width: 50%;
+    border: 1px solid #c2c2c2;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;   /* 비울 (width를 부모의 100%로 줬기 때문에 height 알수 없어서) */
+    object-fit: cover;
+    background-color: #f3f3f3;
+    margin-right: 20px;
+}
+.title {
+    font-family: 'Cormorant Garamond', sans-serif;
+    margin: 20px 10px 30px 10px;
+    font-size: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #c2c2c2;;
+}
+
+.card div{
+    max-width: 500px;
+    margin: 20px 10px;
+    font-size: 18px;
+}
+
+.card div:last-child{
+    font-size: 16px;
+    color : #6b6b6b;
+    padding: 10px;
+    border: 1px solid #c2c2c2;
+    border-radius: 10px;
+}
+.card span {
+    margin: 20px 10px;
+    font-size: 26px;
+    color: #2563ed;
 }
