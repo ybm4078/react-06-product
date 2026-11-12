@@ -3,37 +3,38 @@
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import styles from "./ProductDetail.module.css";
+import type { Product } from "./ProductList.tsx";
 
 function ProductDetail() {
-    const { id } = useParams();
+    const { id } = useParams(); // string | undefined
 
-    const [post, setPost] = useState(null);
+    // 아직 값이 도착하지 않은 상태의 "초기값"을 매개변수로 제공해줘야 함
+    // Product 타입으로만 강제하면
+    // 값이 "있다"로밖에는 표현을 할 수 없음
+    const [post, setPost] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        // 지금 사용자가 /product/    만 일부러 치고 들어온 경우도 막는데
+        // 실행이 아니라 App - ProductDetail 이 관계까지 생각해서 쓰는 게 아니라
+        // ProductDetail만 보고 있는 것
+        if (!id) return; // id값이 없으면 undefined가 찍혀서 id가 없으면 반환
+
         fetch(`https://dummyjson.com/products/${id}`)
             .then(res => res.json())
-            .then(json => setPost(json))
+            .then((json: Product) => setPost(json))
             .catch(err => console.log(err))
             .finally(() => setLoading(false));
-            // .finally(함수) 매서드는 메서드 체인을 통해
-            // then을 통해 성공 시나리오든, catch를 통한 실패 시나리오든
-            // 상관 없이 마지막에 실행되어야 하는 내용을 기록
     }, []);
 
-    // 초기 렌더링에는 loading이 true이므로, 이 아래 if가 출력
     if (loading) {
         return <div className={styles.loading}>본문을 불러오는 중입니다...</div>;
     }
-    // useEffect가 발동해서 fetch가 실행되는데
-    // 정상적으로 데이터를 받아오든, 받아오지 못하든 loading은 false가 됨
-    // 이 아래로 내려오는데 실패되면 product state는 갱신되지 못 하고 null로 남아있음
 
     if (!post) {
         return <div className={styles.loading}>상품을 찾을 수 없습니다.</div>;
     }
 
-    //loading도 false이고, post도 있는 상황
     return (
         <div className={styles.background}>
             <div className={styles.container}>
